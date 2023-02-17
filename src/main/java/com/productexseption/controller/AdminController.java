@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api")
-public class ResourceController {
+public class AdminController {
 
-    @GetMapping("/user")
-    public String getUser() {
-        return "Hello User";
+    @GetMapping("/admin")
+    public String getAdmin() {
+        return "Hello Admin";
     }
 }

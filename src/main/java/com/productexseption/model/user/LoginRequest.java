@@ -1,4 +1,4 @@
-package com.productexseption.model;
+package com.productexseption.model.user;
 
 import lombok.Data;
 

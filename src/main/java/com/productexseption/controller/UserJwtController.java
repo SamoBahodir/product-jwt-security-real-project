@@ -1,6 +1,6 @@
 package com.productexseption.controller;
 
-import com.productexseption.model.LoginRequest;
+import com.productexseption.model.user.LoginRequest;
 import com.productexseption.model.user.User;
 import com.productexseption.model.user.UserRepository;
 import com.productexseption.security.JwtTokenProvider;

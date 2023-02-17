@@ -1,33 +1,26 @@
 package com.productexseption.config;
 
-import com.productexseption.model.role.RoleName;
+import com.productexseption.security.JwtConfigurer;
+import com.productexseption.security.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
-
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -41,17 +34,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers(register,login).permitAll()
-                .antMatchers("/helloadmin").hasRole(RoleName.ADMIN.name())
-                .antMatchers("/hellouser").hasRole(RoleName.USER.name())
+                .antMatchers(register, login).permitAll()
+                .antMatchers("/api/admin").hasAuthority("ADMIN")
+                .antMatchers("/api/user").hasAuthority("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .apply(new JwtConfigurer(jwtTokenProvider));
     }
-
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
 }
