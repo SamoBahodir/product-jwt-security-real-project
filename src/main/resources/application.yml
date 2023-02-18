@@ -1,6 +1,19 @@
 server:
   port: 8080
+  shutdown: graceful #Wait if it has any action
+  forward-headers-strategy: framework
 spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: myGroup
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   datasource:
     url: jdbc:postgresql://localhost:5433/security
     username: postgres
@@ -17,3 +30,8 @@ jwt:
   token:
     secret: jwtjavasamo
     validity: 864000000
+springdoc:
+  swagger-ui:
+    path: /v1/swagger/index.html
+  api-docs:
+    path: /v1/swagger/api-docs

@@ -20,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
-public class UserJwtController {
+public class JwtController {
     private final UserRepository userRepository;
     private final JwtTokenProvider tokenProvider;
     private final AuthenticationManager authenticationManager;

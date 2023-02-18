@@ -26,6 +26,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         String register = "/api/register";
         String login = "/api/login";
+        String swagger="/v1/swagger/**";
+        String kafka="/api/v1/kafka/**";
         http
                 .csrf()
                 .disable()
@@ -34,7 +36,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers(register, login).permitAll()
+                .antMatchers(
+                        register,
+                        login,
+                        kafka,
+                        swagger
+                ).permitAll()
                 .antMatchers("/api/admin").hasAuthority("ADMIN")
                 .antMatchers("/api/user").hasAuthority("USER")
                 .anyRequest()
