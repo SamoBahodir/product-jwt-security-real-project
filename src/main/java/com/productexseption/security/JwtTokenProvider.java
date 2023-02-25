@@ -18,7 +18,6 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
-import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -70,8 +69,7 @@ public class JwtTokenProvider {
 
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(getUser(token));
-        Optional<String> optionalS = SecurityUtils.getCurrentUser();
-        System.out.println(optionalS);
+        System.out.println(SecurityUtils.getCurrentUser());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 

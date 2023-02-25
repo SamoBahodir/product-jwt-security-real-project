@@ -1,13 +1,11 @@
 package com.productexseption.controller;
 
-import com.productexseption.model.user.User;
+import com.productexseption.core.SuccessfulResponse;
+import com.productexseption.model.user.UserPayload;
+import com.productexseption.model.user.UserResponse;
 import com.productexseption.model.user.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
@@ -18,15 +16,20 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/user")
+    public String getAdmin() {
+        return "Hello User";
+    }
+
     @PostMapping("/register")
-    public ResponseEntity create(@RequestBody User user) {
-        if (!checkPassword(user.getPassword())) {
-            return new ResponseEntity<>("parol uzunligi 4 dan kam ", HttpStatus.BAD_REQUEST);
+    public SuccessfulResponse<UserResponse> create(@RequestBody UserPayload userPayload) {
+        if (!checkPassword(userPayload.getPassword())) {
+            return new SuccessfulResponse<>("parol uzunligi 4 dan kam ", HttpStatus.BAD_REQUEST);
         }
-        if (userService.checkUsername(user.getUsername())) {
-            return new ResponseEntity<>("bu user oldin royhatdan o'tkan ", HttpStatus.BAD_REQUEST);
+        if (userService.checkUsername(userPayload.getUsername())) {
+            return new SuccessfulResponse<>("bu user oldin royhatdan o'tkan ", HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(userService.create(user));
+        return new SuccessfulResponse<>(userService.create(userPayload),HttpStatus.OK);
     }
 
     public Boolean checkPassword(String password) {

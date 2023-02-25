@@ -27,7 +27,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         String register = "/api/register";
         String login = "/api/login";
         String swagger="/v1/swagger/**";
-        String kafka="/api/v1/kafka/**";
         http
                 .csrf()
                 .disable()
@@ -39,11 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         register,
                         login,
-                        kafka,
                         swagger
                 ).permitAll()
                 .antMatchers("/api/admin").hasAuthority("ADMIN")
-                .antMatchers("/api/user").hasAuthority("USER")
+                .antMatchers("/api/**").hasAuthority("USER")
                 .anyRequest()
                 .authenticated()
                 .and()

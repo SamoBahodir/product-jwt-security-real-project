@@ -1,11 +1,13 @@
 package com.productexseption.controller;
 
+import com.productexseption.core.SuccessfulResponse;
+import com.productexseption.model.role.Role;
 import com.productexseption.model.user.LoginRequest;
 import com.productexseption.model.user.User;
 import com.productexseption.model.user.UserRepository;
 import com.productexseption.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,7 +28,7 @@ public class JwtController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public ResponseEntity create(@RequestBody LoginRequest request) {
+    public SuccessfulResponse<Map<Object, Object>> create(@RequestBody LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -37,8 +39,9 @@ public class JwtController {
         }
         String token = tokenProvider.createToken(user.getUsername(), user.getRoles());
         Map<Object, Object> map = new HashMap<>();
-        map.put("username", user.getUsername());
         map.put("token", token);
-        return ResponseEntity.ok(map);
+        map.put("username", user.getUsername());
+        map.put("role",user.getRoles().stream().map(Role::getName));
+        return new SuccessfulResponse<>(map, HttpStatus.OK);
     }
 }

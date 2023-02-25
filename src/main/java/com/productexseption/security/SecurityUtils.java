@@ -15,8 +15,7 @@ public final class SecurityUtils {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(securityContext.getAuthentication())
                 .map(authentication -> {
-                    if (authentication.getPrincipal() instanceof UserDetails) {
-                        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                    if (authentication.getPrincipal() instanceof UserDetails userDetails) {
                         return userDetails.getUsername();
                     } else if (authentication.getPrincipal() instanceof String) {
                         return (String) authentication.getPrincipal();
