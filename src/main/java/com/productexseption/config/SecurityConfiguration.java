@@ -26,6 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         String register = "/api/register";
         String integration = "/api/v1/integration/**";
+        String calculator = "/api/bank/**";
         String login = "/api/login";
         String swagger="/v1/swagger/**";
         http
@@ -39,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         register,
                         login,
+                        calculator,
                         integration,
                         swagger
                 ).permitAll()
