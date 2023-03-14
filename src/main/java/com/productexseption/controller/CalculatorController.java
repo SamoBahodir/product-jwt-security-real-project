@@ -15,8 +15,9 @@ public class CalculatorController {
     @PostMapping("/calculator")
     public List<CalculatorResponse> calculator(@RequestBody CalculatorRequest request,
                                                @RequestParam CountType countType,
-                                               @RequestParam CreditType creditType) {
-        return service.calculator(request, countType ,creditType);
+                                               @RequestParam CreditType creditType,
+                                               @RequestParam(required = false) Currency currency) {
+        return service.calculator(request, countType ,creditType,currency);
 
     }
 }
