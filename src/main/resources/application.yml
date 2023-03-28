@@ -3,6 +3,17 @@ server:
   shutdown: graceful #Wait if it has any action
   forward-headers-strategy: framework
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL}
+    password: ${PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   profiles:
     active: TEST
   datasource:

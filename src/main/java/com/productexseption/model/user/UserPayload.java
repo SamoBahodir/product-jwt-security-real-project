@@ -4,6 +4,7 @@ import com.productexseption.model.role.Role;
 import lombok.Data;
 
 import java.util.Collection;
+import java.util.Set;
 
 @Data
 public class UserPayload {
@@ -13,5 +14,5 @@ public class UserPayload {
     private String lastname;
     private Status status;
     private String email;
-    private Collection<Role> roles;
+    private Set<Role> roles;
 }

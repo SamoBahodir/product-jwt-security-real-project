@@ -22,6 +22,7 @@ public class User {
     private String password;
     private String firstname;
     private String lastname;
+    private String code;
     @Enumerated(EnumType.STRING)
     private Status status;
     private String email;

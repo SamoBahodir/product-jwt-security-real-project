@@ -1,11 +1,12 @@
 package com.productexseption.security;
 
+import lombok.Data;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
-
+@Data
 public final class SecurityUtils {
     private SecurityUtils() {
 

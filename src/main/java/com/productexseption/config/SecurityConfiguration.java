@@ -24,8 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        String register = "/api/register";
-        String login = "/api/login";
+        String register = "/v1/register";
+        String login = "/v1/login";
+        String login1 = "/v1/login1/**";
+        String login2 = "/v1/login2/**";
         String swagger="/v1/swagger/**";
         http
                 .csrf()
@@ -38,6 +40,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         register,
                         login,
+                        login1,
+                        login2,
                         swagger
                 ).permitAll()
                 .antMatchers("/api/admin").hasAuthority("ADMIN")
