@@ -40,8 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         register,
                         login,
-                        login1,
-                        login2,
                         swagger
                 ).permitAll()
                 .antMatchers("/api/admin").hasAuthority("ADMIN")
