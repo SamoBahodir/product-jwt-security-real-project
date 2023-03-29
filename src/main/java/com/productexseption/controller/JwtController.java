@@ -25,7 +25,6 @@ import java.util.Map;
 public class JwtController {
     private final UserRepository userRepository;
     private final JwtTokenProvider tokenProvider;
-    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
 //    @PostMapping("/login")

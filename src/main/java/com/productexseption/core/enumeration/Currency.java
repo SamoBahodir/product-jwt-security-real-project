@@ -1,4 +1,4 @@
-package com.productexseption.calculator;
+package com.productexseption.core.enumeration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

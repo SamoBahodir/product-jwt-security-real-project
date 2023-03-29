@@ -2,7 +2,7 @@ package com.productexseption.integration.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.productexseption.core.Name;
+import com.productexseption.core.dto.Name;
 import lombok.Data;
 
 @Data
