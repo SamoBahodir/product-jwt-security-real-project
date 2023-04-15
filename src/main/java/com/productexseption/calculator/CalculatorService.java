@@ -1,5 +1,8 @@
 package com.productexseption.calculator;
 
+import com.productexseption.core.enumeration.CountType;
+import com.productexseption.core.enumeration.CreditType;
+import com.productexseption.core.enumeration.Currency;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

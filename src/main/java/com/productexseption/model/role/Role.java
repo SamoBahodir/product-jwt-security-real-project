@@ -1,5 +1,6 @@
 package com.productexseption.model.role;
 
+import com.productexseption.core.enumeration.RoleName;
 import lombok.Getter;
 import lombok.Setter;
 

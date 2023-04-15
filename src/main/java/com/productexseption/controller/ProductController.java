@@ -1,5 +1,6 @@
 package com.productexseption.controller;
 
+import com.productexseption.config.SwaggerConfig;
 import com.productexseption.core.SuccessDataIterable;
 import com.productexseption.core.SuccessfulResponse;
 import com.productexseption.core.page_request.PageableRequest;
@@ -7,6 +8,7 @@ import com.productexseption.exception.ResourceNotFoundException;
 import com.productexseption.model.product.Product;
 import com.productexseption.model.product.ProductResponse;
 import com.productexseption.model.product.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/product")
+@SecurityRequirement(name = SwaggerConfig.BEARER)
 public class ProductController {
     private final ProductService productService;
 

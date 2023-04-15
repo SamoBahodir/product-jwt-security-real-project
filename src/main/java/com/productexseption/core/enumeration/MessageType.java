@@ -1,4 +1,4 @@
-package com.productexseption.core;
+package com.productexseption.core.enumeration;
 
 public enum MessageType {
     INFO,

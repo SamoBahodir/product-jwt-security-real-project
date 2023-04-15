@@ -1,5 +1,6 @@
 package com.productexseption.calculator;
 
+import com.productexseption.core.enumeration.Currency;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

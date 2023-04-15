@@ -1,9 +1,9 @@
 package com.productexseption.model.user;
 
+import com.productexseption.core.enumeration.Status;
 import com.productexseption.model.role.Role;
 import lombok.Data;
 
-import java.util.Collection;
 import java.util.Set;
 
 @Data

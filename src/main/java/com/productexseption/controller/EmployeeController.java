@@ -1,17 +1,20 @@
 package com.productexseption.controller;
 
+import com.productexseption.config.SwaggerConfig;
 import com.productexseption.core.SuccessfulResponse;
 import com.productexseption.exception.ResourceNotFoundException;
 import com.productexseption.model.employe.Employee;
 import com.productexseption.model.employe.EmployeeRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/employee")
 @RequiredArgsConstructor
+@RequestMapping("/api/employee")
+@SecurityRequirement(name = SwaggerConfig.BEARER)
 public class EmployeeController {
     private final EmployeeRepository employeeRepository;
 

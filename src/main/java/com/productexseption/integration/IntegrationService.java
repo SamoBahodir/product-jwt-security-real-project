@@ -2,30 +2,39 @@ package com.productexseption.integration;
 
 import com.productexseption.core.page_request.PageableRequest;
 import com.productexseption.exception.ResourceNotFoundException;
-import com.productexseption.integration.pojo.Advice;
-import com.productexseption.integration.pojo.AdvocacyRegister;
-import com.productexseption.integration.pojo.LicenseSearchDto;
-import com.productexseption.integration.pojo.Licenses;
+import com.productexseption.integration.pojo.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class IntegrationService {
+    private final WebClient webClient;
 
     @Value("${lawyer}")
     String lawyerRegister;
+
+    public YurxizmatCategory string() {
+        return webClient.get()
+                .uri("https://yurxizmat.uz/uz/api/categories")
+                .retrieve()
+                .bodyToMono(YurxizmatCategory.class)
+                .block();
+    }
 
     public ResponseEntity<AdvocacyRegister> getRegister(String search,
                                                         Long contragentId,
@@ -85,9 +94,10 @@ public class IntegrationService {
             throw new ResourceNotFoundException(e.getMessage());
         }
     }
+
     public Licenses getLicensesBySearch(LicenseSearchDto searchDto) {
         String url = "https://api.licenses.uz/v1/register/open_source?page=" + searchDto.getPage() + "&size=" + searchDto.getPerPage();
-        RestTemplate restTemplate=new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> params = new HashMap<>();
         if (searchDto.getDocumentId() != null) {
             params.put("document_id", searchDto.getDocumentId());
@@ -111,7 +121,7 @@ public class IntegrationService {
             Licenses res = restTemplate.getForObject(url, Licenses.class);
 
             if (res == null) {
-               throw new ResourceNotFoundException("Not found");
+                throw new ResourceNotFoundException("Not found");
             }
 
             return res;

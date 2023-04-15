@@ -1,5 +1,6 @@
 package com.productexseption.model.user;
 
+import com.productexseption.core.enumeration.Status;
 import com.productexseption.model.role.Role;
 import com.sun.istack.NotNull;
 import lombok.Getter;

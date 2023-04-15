@@ -1,4 +1,4 @@
-package com.productexseption.core;
+package com.productexseption.core.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
