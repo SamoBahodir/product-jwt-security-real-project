@@ -10,7 +10,4 @@ public class ResourceNotFoundException extends Exception {
         super(msg);
     }
 
-    public ResourceNotFoundException(String msg, Throwable throwable) {
-        super(msg, throwable);
-    }
 }
